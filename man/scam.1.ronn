@@ -1,0 +1,75 @@
+scam(2) -- Really basic fake models for in-memory types
+=======================================================
+
+## SYNOPSIS
+
+Write your model class. Mix Scam in via `include Scam`. Go eat a sandwich.
+
+- `ScamModel.create(attrs={})`
+- `ScamModel.find(id_or_attributes)`
+- `ScamModel.sorted_by(attribute)`
+- `ScamModel.all`
+- `ScamModel[id]`
+- `ScamModel#==(object)`
+- `ScamModel#eq?(object)`
+
+## DESCRIPTION
+
+Scam is a small mixin for making a class look like an ORM-ish object, ala ActiveRecord, MongoMapper, etc. Classes including `Scam` get a `create` method for creating new instances, `find` and `[]` accessors for looking them up, enumerable methods (`select`, `reject`, etc.) for querying for in-memory models, can define a sort order, and methods for comparing instances.
+
+## USAGE
+
+Include the `Scam` module into your class. This will automatically add an `id` attribute and accessor to your class.
+
+## CREATING MODELS
+
+You can make a new model instance by calling `create` on your class. This method takes a hash specifying the value for all the attributes on the class. At the least, you should pass an `id` value; otherwise, what's the point?
+
+## LOOKING UP MODELS
+
+Once you've created some models, you can look them up with `find` or `[]`. They both take either a number or a string as a parameter and look up model objects by ID. If a model could not be found for the specified ID, `nil` is returned.
+
+## SORTING MODELS
+
+Usually you'll want to sort models by ID; indeed this is the default ordering. However, should you come across a case where you want models to order by some other attribute, you can specify it with `sorted_by`, passing the attribute to sort on.
+
+## LISTING ALL MODELS
+
+Should you need to fetch all the models defined in memory, you can fetch them with `all`. This will return an array of all models created so far.
+
+## COMPARING MODELS
+
+Given two model instances, you can compare them for equality with `==` or `eql?`. They both return true if the instances have the same class and ID; otherwise, they return false.
+
+## ERRORS AND EXCEPTIONS
+
+No exceptions are raised by Scam methods. Enumerable methods (`select`, `detect`, etc.) will return nil if nothing was found.
+
+## EXAMPLE
+
+    class FeedTemplate
+      include Scam
+
+      sorted_by :title
+      attr_accessor :title
+    end
+
+    FeedTemplate.create(:id => 1, :title => 'Twitter')
+    FeedTemplate.create(:id => 2, :title => 'Dribble')
+
+    FeedTemplate.all
+
+    FeedTemplate.each do |tpl|
+      # Tinker with tpl
+    end
+
+    FeedTemplate.detect { |tpl| tpl.title == 'Twitter' }
+
+    FeedTemplate.find(2)
+
+    FeedTemplate.find('2')
+
+## SEE ALSO
+
+* ActiveModel provides goodies like validation, attributes, and reflection.
+* DataMapper classes needn't map to a relational database, so you could use that to implement in-memory models?

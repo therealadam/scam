@@ -7,7 +7,14 @@ GEM
   remote: http://rubygems.org/
   specs:
     diff-lcs (1.1.2)
+    hpricot (0.8.6)
+    mustache (0.99.4)
     rake (0.9.2)
+    rdiscount (1.6.8)
+    ronn (0.7.3)
+      hpricot (>= 0.8.2)
+      mustache (>= 0.7.0)
+      rdiscount (>= 1.5.8)
     rspec (2.3.0)
       rspec-core (~> 2.3.0)
       rspec-expectations (~> 2.3.0)
@@ -22,5 +29,6 @@ PLATFORMS
 
 DEPENDENCIES
   rake
+  ronn
   rspec (~> 2.3)
   scam!

@@ -1,0 +1,45 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "SCAM" "2" "February 2012" "" ""
+.
+.SH "NAME"
+\fBscam\fR \- Really basic fake models for in\-memory types
+.
+.SH "NAME"
+.
+.SH "SYNOPSIS"
+.
+.nf
+
+class User
+  include Scam
+
+  attr_accessor :name, :username
+end
+
+# Adds create to the scam class
+User\.create(:id => 1, :name => \'Adam Keys\', :username => \'akk\')
+User\.create(:id => 2, :name => \'John Nunemaker\', :username => \'nunes\')
+
+# Adds enumerable methods
+User\.select { |u| u\.username == \'akk\' }
+
+# Adds sorted_by
+# Custom sort
+# Find by ID or string
+# Find by [] method
+# Equality
+.
+.fi
+.
+.SH "DESCRIPTION"
+.
+.SH "EXCEPTIONS"
+.
+.SH "EXAMPLE"
+.
+.SH "SEE ALSO"
+.
+.SH "COPYRIGHT"
+

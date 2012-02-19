@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.description = %q{Really basic fake model for type-ish stuff}
 
   s.add_development_dependency 'rspec', '~> 2.3'
+  s.add_development_dependency 'ronn'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
