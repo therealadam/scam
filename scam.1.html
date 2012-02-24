@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv='content-type' value='text/html;charset=utf8'>
+  <meta name='generator' value='Ronn/v0.7.3 (http://github.com/rtomayko/ronn/tree/0.7.3)'>
+  <title>scam(2) - Really basic fake models for in-memory types</title>
+  <style type='text/css' media='all'>
+  /* style: man */
+  body#manpage {margin:0}
+  .mp {max-width:100ex;padding:0 9ex 1ex 4ex}
+  .mp p,.mp pre,.mp ul,.mp ol,.mp dl {margin:0 0 20px 0}
+  .mp h2 {margin:10px 0 0 0}
+  .mp > p,.mp > pre,.mp > ul,.mp > ol,.mp > dl {margin-left:8ex}
+  .mp h3 {margin:0 0 0 4ex}
+  .mp dt {margin:0;clear:left}
+  .mp dt.flush {float:left;width:8ex}
+  .mp dd {margin:0 0 0 9ex}
+  .mp h1,.mp h2,.mp h3,.mp h4 {clear:left}
+  .mp pre {margin-bottom:20px}
+  .mp pre+h2,.mp pre+h3 {margin-top:22px}
+  .mp h2+pre,.mp h3+pre {margin-top:5px}
+  .mp img {display:block;margin:auto}
+  .mp h1.man-title {display:none}
+  .mp,.mp code,.mp pre,.mp tt,.mp kbd,.mp samp,.mp h3,.mp h4 {font-family:monospace;font-size:14px;line-height:1.42857142857143}
+  .mp h2 {font-size:16px;line-height:1.25}
+  .mp h1 {font-size:20px;line-height:2}
+  .mp {text-align:justify;background:#fff}
+  .mp,.mp code,.mp pre,.mp pre code,.mp tt,.mp kbd,.mp samp {color:#131211}
+  .mp h1,.mp h2,.mp h3,.mp h4 {color:#030201}
+  .mp u {text-decoration:underline}
+  .mp code,.mp strong,.mp b {font-weight:bold;color:#131211}
+  .mp em,.mp var {font-style:italic;color:#232221;text-decoration:none}
+  .mp a,.mp a:link,.mp a:hover,.mp a code,.mp a pre,.mp a tt,.mp a kbd,.mp a samp {color:#0000ff}
+  .mp b.man-ref {font-weight:normal;color:#434241}
+  .mp pre {padding:0 4ex}
+  .mp pre code {font-weight:normal;color:#434241}
+  .mp h2+pre,h3+pre {padding-left:0}
+  ol.man-decor,ol.man-decor li {margin:3px 0 10px 0;padding:0;float:left;width:33%;list-style-type:none;text-transform:uppercase;color:#999;letter-spacing:1px}
+  ol.man-decor {width:100%}
+  ol.man-decor li.tl {text-align:left}
+  ol.man-decor li.tc {text-align:center;letter-spacing:4px}
+  ol.man-decor li.tr {text-align:right;float:right}
+  </style>
+  <style type='text/css' media='all'>
+  /* style: toc */
+  .man-navigation {display:block !important;position:fixed;top:0;left:113ex;height:100%;width:100%;padding:48px 0 0 0;border-left:1px solid #dbdbdb;background:#eee}
+  .man-navigation a,.man-navigation a:hover,.man-navigation a:link,.man-navigation a:visited {display:block;margin:0;padding:5px 2px 5px 30px;color:#999;text-decoration:none}
+  .man-navigation a:hover {color:#111;text-decoration:underline}
+  </style>
+</head>
+<!--
+  The following styles are deprecated and will be removed at some point:
+  div#man, div#man ol.man, div#man ol.head, div#man ol.man.
+
+  The .man-page, .man-decor, .man-head, .man-foot, .man-title, and
+  .man-navigation should be used instead.
+-->
+<body id='manpage'>
+  <div class='mp' id='man'>
+
+  <div class='man-navigation' style='display:none'>
+    <a href="#NAME">NAME</a>
+    <a href="#SYNOPSIS">SYNOPSIS</a>
+    <a href="#DESCRIPTION">DESCRIPTION</a>
+    <a href="#USAGE">USAGE</a>
+    <a href="#CREATING-MODELS">CREATING MODELS</a>
+    <a href="#LOOKING-UP-MODELS">LOOKING UP MODELS</a>
+    <a href="#SORTING-MODELS">SORTING MODELS</a>
+    <a href="#LISTING-ALL-MODELS">LISTING ALL MODELS</a>
+    <a href="#COMPARING-MODELS">COMPARING MODELS</a>
+    <a href="#ERRORS-AND-EXCEPTIONS">ERRORS AND EXCEPTIONS</a>
+    <a href="#EXAMPLE">EXAMPLE</a>
+    <a href="#SEE-ALSO">SEE ALSO</a>
+  </div>
+
+  <ol class='man-decor man-head man head'>
+    <li class='tl'>scam(2)</li>
+    <li class='tc'>Scam Manual</li>
+    <li class='tr'>scam(2)</li>
+  </ol>
+
+  <h2 id="NAME">NAME</h2>
+<p class="man-name">
+  <code>scam</code> - <span class="man-whatis">Really basic fake models for in-memory types</span>
+</p>
+
+<h2 id="SYNOPSIS">SYNOPSIS</h2>
+
+<p>Write your model class. Mix Scam in via <code>include Scam</code>. Go eat a sandwich.</p>
+
+<ul>
+<li><code>ScamModel.create(attrs={})</code></li>
+<li><code>ScamModel.find(id_or_attributes)</code></li>
+<li><code>ScamModel.sorted_by(attribute)</code></li>
+<li><code>ScamModel.all</code></li>
+<li><code>ScamModel[id]</code></li>
+<li><code>ScamModel#==(object)</code></li>
+<li><code>ScamModel#eq?(object)</code></li>
+</ul>
+
+
+<h2 id="DESCRIPTION">DESCRIPTION</h2>
+
+<p>Scam is a small mixin for making a class look like an ORM-ish object, ala ActiveRecord, MongoMapper, etc. Classes including <code>Scam</code> get a <code>create</code> method for creating new instances, <code>find</code> and <code>[]</code> accessors for looking them up, enumerable methods (<code>select</code>, <code>reject</code>, etc.) for querying for in-memory models, can define a sort order, and methods for comparing instances.</p>
+
+<h2 id="USAGE">USAGE</h2>
+
+<p>Include the <code>Scam</code> module into your class. This will automatically add an <code>id</code> attribute and accessor to your class.</p>
+
+<h2 id="CREATING-MODELS">CREATING MODELS</h2>
+
+<p>You can make a new model instance by calling <code>create</code> on your class. This method takes a hash specifying the value for all the attributes on the class. At the least, you should pass an <code>id</code> value; otherwise, what's the point?</p>
+
+<h2 id="LOOKING-UP-MODELS">LOOKING UP MODELS</h2>
+
+<p>Once you've created some models, you can look them up with <code>find</code> or <code>[]</code>. They both take either a number or a string as a parameter and look up model objects by ID. If a model could not be found for the specified ID, <code>nil</code> is returned.</p>
+
+<h2 id="SORTING-MODELS">SORTING MODELS</h2>
+
+<p>Usually you'll want to sort models by ID; indeed this is the default ordering. However, should you come across a case where you want models to order by some other attribute, you can specify it with <code>sorted_by</code>, passing the attribute to sort on.</p>
+
+<h2 id="LISTING-ALL-MODELS">LISTING ALL MODELS</h2>
+
+<p>Should you need to fetch all the models defined in memory, you can fetch them with <code>all</code>. This will return an array of all models created so far.</p>
+
+<h2 id="COMPARING-MODELS">COMPARING MODELS</h2>
+
+<p>Given two model instances, you can compare them for equality with <code>==</code> or <code>eql?</code>. They both return true if the instances have the same class and ID; otherwise, they return false.</p>
+
+<h2 id="ERRORS-AND-EXCEPTIONS">ERRORS AND EXCEPTIONS</h2>
+
+<p>No exceptions are raised by Scam methods. Enumerable methods (<code>select</code>, <code>detect</code>, etc.) will return nil if nothing was found.</p>
+
+<h2 id="EXAMPLE">EXAMPLE</h2>
+
+<pre><code>class FeedTemplate
+  include Scam
+
+  sorted_by :title
+  attr_accessor :title
+end
+
+FeedTemplate.create(:id =&gt; 1, :title =&gt; 'Twitter')
+FeedTemplate.create(:id =&gt; 2, :title =&gt; 'Dribble')
+
+FeedTemplate.all
+
+FeedTemplate.each do |tpl|
+  # Tinker with tpl
+end
+
+FeedTemplate.detect { |tpl| tpl.title == 'Twitter' }
+
+FeedTemplate.find(2)
+
+FeedTemplate.find('2')
+</code></pre>
+
+<h2 id="SEE-ALSO">SEE ALSO</h2>
+
+<ul>
+<li>ActiveModel provides goodies like validation, attributes, and reflection.</li>
+<li>DataMapper classes needn't map to a relational database, so you could use that to implement in-memory models?</li>
+</ul>
+
+
+
+  <ol class='man-decor man-foot man foot'>
+    <li class='tl'>Scam 0.2.0</li>
+    <li class='tc'>February 2012</li>
+    <li class='tr'>scam(2)</li>
+  </ol>
+
+  </div>
+</body>
+</html>
